@@ -13,6 +13,13 @@
     </head>
     <body>
         <h1>Hello World!</h1>
-        <h1> cosito</h1>
+        <form name="form" action="VistaIngrediente.jsp" method="get">
+                    
+            Nombre:<input type="text" name="nombre"> 
+                        </br>
+
+            <input type="submit" value="Enviar">
+            
+        </form>
     </body>
 </html>

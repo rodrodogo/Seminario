@@ -4,6 +4,7 @@
     Author     : Rodrigon
 --%>
 
+<%@page import="Logica.Producto"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,5 +14,12 @@
     </head>
     <body>
         <h1>Hello World! gefa</h1>
+        <%
+            
+            
+            Producto p = new Producto();
+        
+
+        %>        
     </body>
 </html>

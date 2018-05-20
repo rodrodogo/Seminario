@@ -19,14 +19,33 @@ public class Mediador {
         
     }
     
+    public void actualizarIng(String[] actualizacion){
+        gInventario.modificarInv(actualizacion);
+    }
     
     
-    public String consultarIng(String key){
+    public String[] consultarIng(String key){
         Ingrediente busqueda = gInventario.consultarInv(key);
         if (busqueda == null){
-            return "no se encontro";
+           String[] envio = new String[6];
+            envio[0] = "no existe";
+            envio[1] =  "no existe";
+            envio[2] =  "no existe";
+            envio[3] =  "no existe";
+            envio[4] =  "no existe";
+            envio[5] =  "no existe";
+            
+            return envio;
         }else{
-            return busqueda.getNombre() + busqueda.getPrecio();
+            
+            String[] envio = new String[6];
+            envio[0] = busqueda.getNombre();
+            envio[1] = busqueda.getCategoria();
+            envio[2] = "" +busqueda.getCantidad();
+            envio[3] = "" +busqueda.getPrecio();
+            envio[4] = "" +busqueda.isCambiable();
+            envio[5] = "" +busqueda.getCaracteristicas();
+            return envio;
         }
     }
     

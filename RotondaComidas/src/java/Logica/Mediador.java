@@ -12,15 +12,20 @@ package Logica;
 public class Mediador {
     
     private GestorInventario gInventario;
-
+    private GestorRestaurante gRestaurante;
     public Mediador() {
         
         gInventario =  new GestorInventario();
+        gRestaurante= new GestorRestaurante();
         
     }
     
     public void actualizarIng(String[] actualizacion){
         gInventario.modificarInv(actualizacion);
+    }
+    public void registrarRestaurante (String[] actualizacion){
+        Restaurante r= new Restaurante(actualizacion);
+        gRestaurante.guardarDatos(r);
     }
     
     

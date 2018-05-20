@@ -25,7 +25,56 @@ public class Restaurante {
         nombre = data[3];
         telefono = Integer.parseInt(data[4]);
     }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public void setDueño(String dueño) {
+        this.dueño = dueño;
+    }
+
+    public void setNit(int nit) {
+        this.nit = nit;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setTelefono(int telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public String getDueño() {
+        return dueño;
+    }
+
+    public int getNit() {
+        return nit;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public int getTelefono() {
+        return telefono;
+    }
    
+    
 public void crearMenu(String[] actualizacion){
        
     }

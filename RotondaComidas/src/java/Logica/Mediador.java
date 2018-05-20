@@ -23,10 +23,16 @@ public class Mediador {
     public void actualizarIng(String[] actualizacion){
         gInventario.modificarInv(actualizacion);
     }
-    public void registrarRestaurante (String[] actualizacion){
+    public boolean registrarRestaurante (String[] actualizacion, int op){
         Restaurante r= new Restaurante(actualizacion);
-        gRestaurante.guardarDatos(r);
-        System.out.println("Exitoso");
+        //operacion de registrar
+        boolean res=false;
+        if (op==1)
+    res=   gRestaurante.guardarDatos(r);
+        else
+             res=   gRestaurante.actualizarDatos(r);
+        
+        return res;
     }
     
     

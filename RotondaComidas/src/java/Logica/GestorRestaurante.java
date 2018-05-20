@@ -18,12 +18,37 @@ private ArrayList <Restaurante> rest;
         this.rest = new ArrayList<Restaurante>();
     }
 
-    public void guardarDatos(Restaurante r) {
-        rest.add(r);
+    public boolean guardarDatos(Restaurante r) {
+        boolean cre=false;
+        for (int i = 0; i < rest.size(); i++) {
+            if (rest.get(i).getNit()==r.getNit()){
+                cre=true;
+            }
+        }
+        if (cre==false){
+            rest.add(r);
+        }
+        return !cre;
+        
         //tendria que guardar datos en base de datos
     }
-    public void actualizarDatos (String[] actualizacion){
-       
+    public boolean actualizarDatos (Restaurante r){
+       boolean cre=false;//para saber si se modifico o no
+        for (int i = 0; i < rest.size(); i++) {
+            if (rest.get(i).getNit()==r.getNit()){
+                cre=true;
+                Restaurante temp= rest.get(i);
+                temp.setDescripcion(r.getDescripcion());
+                temp.setDireccion(r.getDireccion());
+                temp.setDueño(r.getDueño());
+                temp.setNit(r.getNit());
+                temp.setNombre(r.getNombre());
+                temp.setTelefono(r.getTelefono());
+                break;
+            }
+        }
+        
+        return cre;
     }
     public void borrarDatos(String[] actualizacion){
        

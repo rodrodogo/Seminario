@@ -11,8 +11,25 @@ package Logica;
  */
 public class Restaurante {
 
-    Restaurante(String[] actualizacion) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private String descripcion;
+    private String direccion;
+    private String dueño;
+    private int nit;
+    private String nombre;
+    private int telefono;
+
+    Restaurante(String[] data) {
+        direccion = data[0];
+        dueño = data[1];
+        nit = Integer.parseInt(data[2]);
+        nombre = data[3];
+        telefono = Integer.parseInt(data[4]);
     }
-    
+   
+public void crearMenu(String[] actualizacion){
+       
+    }
+public void eliminarMenu (String[] actualizacion){
+       
+    }
 }

@@ -26,6 +26,7 @@ public class Mediador {
     public void registrarRestaurante (String[] actualizacion){
         Restaurante r= new Restaurante(actualizacion);
         gRestaurante.guardarDatos(r);
+        System.out.println("Exitoso");
     }
     
     

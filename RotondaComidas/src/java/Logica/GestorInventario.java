@@ -46,18 +46,25 @@ public class GestorInventario {
         return null;
     }
     //cambio de parametros en el modelod de clases
-    public void modificarInv(String[] modificaciones){
-        System.out.println("antes");
+    public void modificarInv(Ingrediente in){
+        System.out.println(ingredientes.get(0).getNombre() + "comparado a "+ in.getNombre() );
+        Ingrediente temp = null;
+        //Ingrediente temp = consultarInv(modificaciones[0]);
         
-        Ingrediente temp = consultarInv(modificaciones[0]);
         
-        temp.setNombre(modificaciones[0]);
+        for (int i = 0; i < ingredientes.size(); i++) {
+            if (ingredientes.get(i).getNombre().equals(in.getNombre())) {
+                temp = ingredientes.get(i);
+                System.out.println("asd");
+            }
+        }
         
-        temp.setCategoria(modificaciones[1]);
-        temp.setCantidad(Integer.parseInt(modificaciones[2]));
-        temp.setPrecio(Integer.parseInt(modificaciones[3]));
-        temp.setCambiable(JSType.toBoolean(modificaciones[4]));
-        temp.setCaracteristicas(modificaciones[5]);
+        temp.setNombre(in.getNombre());        
+//        temp.setCategoria(modificaciones[1]);
+//        temp.setCantidad(Integer.parseInt(modificaciones[2]));
+//        temp.setPrecio(Integer.parseInt(modificaciones[3]));
+//        temp.setCambiable(JSType.toBoolean(modificaciones[4]));
+//        temp.setCaracteristicas(modificaciones[5]);
         
 
     }

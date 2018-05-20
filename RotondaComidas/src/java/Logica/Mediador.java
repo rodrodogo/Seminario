@@ -10,55 +10,61 @@ package Logica;
  * @author Rodrigon
  */
 public class Mediador {
-    
+
     private GestorInventario gInventario;
     private GestorRestaurante gRestaurante;
+
     public Mediador() {
-        
-        gInventario =  new GestorInventario();
-        gRestaurante= new GestorRestaurante();
-        
+
+        gInventario = new GestorInventario();
+        gRestaurante = new GestorRestaurante();
+
     }
-    
-    public void actualizarIng(String[] actualizacion){
-        gInventario.modificarInv(actualizacion);
+
+    public void actualizarIng(String[] actualizacion) {
+        Ingrediente ing = new Ingrediente(Integer.parseInt(actualizacion[2]),
+                actualizacion[5], actualizacion[1], actualizacion[0],
+                Integer.parseInt(actualizacion[3]));
+
+        gInventario.modificarInv(ing);
     }
-    public boolean registrarRestaurante (String[] actualizacion, int op){
-        Restaurante r= new Restaurante(actualizacion);
+
+    public boolean registrarRestaurante(String[] actualizacion, int op) {
+        Restaurante r = new Restaurante(actualizacion);
         //operacion de registrar
-        boolean res=false;
-        if (op==1)
-    res=   gRestaurante.guardarDatos(r);
-        else
-             res=   gRestaurante.actualizarDatos(r);
-        
+        boolean res = false;
+        if (op == 1) {
+            res = gRestaurante.guardarDatos(r);
+        } else {
+            res = gRestaurante.actualizarDatos(r);
+        }
+
         return res;
     }
-    
-    
-    public String[] consultarIng(String key){
+
+    public String[] consultarIng(String key) {
         Ingrediente busqueda = gInventario.consultarInv(key);
-        if (busqueda == null){
-           String[] envio = new String[6];
+        if (busqueda == null) {
+            String[] envio = new String[6];
             envio[0] = "no existe";
-            envio[1] =  "no existe";
-            envio[2] =  "no existe";
-            envio[3] =  "no existe";
-            envio[4] =  "no existe";
-            envio[5] =  "no existe";
-            
+            envio[1] = "no existe";
+            envio[2] = "no existe";
+            envio[3] = "no existe";
+            envio[4] = "no existe";
+            envio[5] = "no existe";
+
             return envio;
-        }else{
-            
+        } else {
+
             String[] envio = new String[6];
             envio[0] = busqueda.getNombre();
             envio[1] = busqueda.getCategoria();
-            envio[2] = "" +busqueda.getCantidad();
-            envio[3] = "" +busqueda.getPrecio();
-            envio[4] = "" +busqueda.isCambiable();
-            envio[5] = "" +busqueda.getCaracteristicas();
+            envio[2] = "" + busqueda.getCantidad();
+            envio[3] = "" + busqueda.getPrecio();
+            envio[4] = "" + busqueda.isCambiable();
+            envio[5] = "" + busqueda.getCaracteristicas();
             return envio;
         }
     }
-    
+
 }

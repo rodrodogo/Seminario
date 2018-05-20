@@ -5,32 +5,61 @@
  */
 package Logica;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Rodrigon
  */
 public class Producto {
-    private String nombre;
-    private String item;
+    private String nombreP;    
+    private ArrayList<String> ingredientes;
+    private boolean personalisable;
+    private int precio;
 
-    public Producto() {
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getItem() {
-        return item;
-    }
-
-    public void setItem(String item) {
-        this.item = item;
+    public Producto(String nombreP, ArrayList<String> ingredientes, boolean personalisable, int precio) {
+        this.nombreP = nombreP;
+        this.ingredientes = ingredientes;
+        this.personalisable = personalisable;
+        this.precio = precio;
     }
     
+
+   
+
+    public String getNombreP() {
+        return nombreP;
+    }
+
+    public void setNombreP(String nombreP) {
+        this.nombreP = nombreP;
+    }
+
+    public ArrayList<String> getIngredientes() {
+        return ingredientes;
+    }
+
+    public void setIngredientes(ArrayList<String> ingredientes) {
+        this.ingredientes = ingredientes;
+    }
+
+    public boolean isPersonalisable() {
+        return personalisable;
+    }
+
+    public void setPersonalisable(boolean personalisable) {
+        this.personalisable = personalisable;
+    }
+
+    public int getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(int precio) {
+        this.precio = precio;
+    }
+
+
+  
     
 }

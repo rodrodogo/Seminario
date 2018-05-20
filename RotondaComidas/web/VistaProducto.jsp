@@ -1,6 +1,6 @@
 <%-- 
-    Document   : VistaIngrediente
-    Created on : 19/05/2018, 08:34:54 PM
+    Document   : VistaProducto
+    Created on : 20/05/2018, 04:23:13 PM
     Author     : Rodrigon
 --%>
 
@@ -10,13 +10,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Administrar ingredientes</title>
+        <title>Productos</title>
         <link rel="stylesheet" type="text/css" media="screen" href="estilos/bootstrap.min.css" />
     </head>
     <body>
         <%!
             Mediador m = new Mediador();
-            String[] consulta = new String[6];                                        
+            String[] consulta = new String[4];                                        
 
         %>
         <section class="container">
@@ -28,14 +28,14 @@
                     <div class="card-header" role="tab" id="headingOne">
                         <h5 class="mb-0">
                             <a data-toggle="collapse" href="#collapseOne" role="button" aria-expanded="true" aria-controls="collapseOne">
-                                Busqueda de ingrediente
+                                Busqueda de Productos
                             </a>
                         </h5>
                     </div>
 
                     <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
                         <form>
-                            <label> ingrese el nombre del ingrediente a buscar</label>
+                            <label> ingrese el nombre del Producto a buscar</label>
                             <input type="text" name ="nombre">
                             <button type="submit" name="busIng" class="btn btn-primary"> buscar</button>
                         </form>
@@ -55,13 +55,13 @@
 
 
         <%
-            for (int i = 0; i < 6; i++) {
+            for (int i = 0; i < 4; i++) {
                         consulta[i] = "";
                 }            
             
             if (request.getParameter("busIng") != null) {
 
-                consulta = m.consultarIng(request.getParameter("nombre"));
+                consulta = m.buscarProducto(request.getParameter("nombre"));
             }
             if (request.getParameter("actualizarIng") != null) {
                 String[] actualizacion = new String[6];
@@ -69,9 +69,8 @@
                 actualizacion[1] = request.getParameter("categoria");
                 actualizacion[2] = request.getParameter("cantidad");
                 actualizacion[3] = request.getParameter("precio");
-                actualizacion[4] = request.getParameter("cambiable");
-                actualizacion[5] = request.getParameter("caracteristicas");
-                m.actualizarIng(actualizacion);
+                
+                m.registrarProducto(actualizacion);
 
             }
             
@@ -81,16 +80,12 @@
 
             Nombre:<input type="text" name="nom" value="<%=consulta[0]%>"> 
             </br>
-            Categoria:<input type="text" name="categoria"value="<%=consulta[1]%>"> 
+            Ingredientes:<input type="text" name="categoria"value="<%=consulta[1]%>"> 
             </br>
-            Cantidad:<input type="text" name="cantidad"value="<%=consulta[2]%>"> 
+            Precio:<input type="text" name="cantidad"value="<%=consulta[2]%>"> 
             </br>
-            Precio:<input type="text" name="precio"value="<%=consulta[3]%>"> 
-            </br>
-            Cambiable:<input type="text" name="cambiable"value="<%=consulta[4]%>"> 
-            </br>
-            Caracteristica<input type="text" name="caracteristicas"value="<%=consulta[5]%>"> 
-            </br>
+            Personalizable<input type="text" name="precio"value="<%=consulta[3]%>"> 
+            </br>            
 
 
             <input type="submit" name="actualizarIng" value="Enviar">

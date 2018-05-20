@@ -13,7 +13,7 @@ import jdk.nashorn.internal.runtime.JSType;
  * @author Rodrigon
  */
 public class GestorInventario {
-    
+
     private ArrayList<Ingrediente> ingredientes;
 
     public GestorInventario() {
@@ -27,45 +27,38 @@ public class GestorInventario {
         ingredientes.add(c);
         ingredientes.add(d);
     }
-    
-    
-    
-    public Ingrediente consultarInv(String busqueda){
-         System.out.println(busqueda);
+
+    public Ingrediente consultarInv(String busqueda) {
+        System.out.println(busqueda);
         for (Ingrediente i : ingredientes) {
-            System.out.println("en busqueda " + i.getNombre()+ " valor " + busqueda);
-            System.out.println(busqueda.equals(i.getNombre()));
-            if(i.getNombre().equals(busqueda) || i.getNombre() == busqueda){
-                System.out.println("encontrado");
-                System.out.println(i.getNombre());
+
+            if (i.getNombre().equals(busqueda) || i.getNombre() == busqueda) {
+
                 return i;
-                
+
             }
         }
-        System.out.println("null culia");
+
         return null;
     }
+
     //cambio de parametros en el modelod de clases
-    public void modificarInv(Ingrediente in){
-        System.out.println(ingredientes.get(0).getNombre() + "comparado a "+ in.getNombre() );
-        Ingrediente temp = null;
-        //Ingrediente temp = consultarInv(modificaciones[0]);
-        
-        
-        for (int i = 0; i < ingredientes.size(); i++) {
-            if (ingredientes.get(i).getNombre().equals(in.getNombre())) {
-                temp = ingredientes.get(i);
-                System.out.println("asd");
-            }
+    public void modificarInv(Ingrediente in) {
+
+
+        Ingrediente temp = consultarInv(in.getNombre());
+
+        if (temp == null) {
+            ingredientes.add(in);
+
+        } else {
+            temp.setNombre(in.getNombre());
+            temp.setCategoria(in.getCategoria());
+            temp.setCantidad(in.getCantidad());
+            temp.setPrecio(in.getPrecio());
+            temp.setCambiable(in.isCambiable());
+            temp.setCaracteristicas(in.getCaracteristicas());
         }
-        
-        temp.setNombre(in.getNombre());        
-//        temp.setCategoria(modificaciones[1]);
-//        temp.setCantidad(Integer.parseInt(modificaciones[2]));
-//        temp.setPrecio(Integer.parseInt(modificaciones[3]));
-//        temp.setCambiable(JSType.toBoolean(modificaciones[4]));
-//        temp.setCaracteristicas(modificaciones[5]);
-        
 
     }
 }

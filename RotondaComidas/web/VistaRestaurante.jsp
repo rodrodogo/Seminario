@@ -17,10 +17,8 @@
         <link rel="stylesheet" type="text/css" media="screen" href="estilos/bootstrap.min.css" />
     </head>
     <body>
-        <%!
-            Mediador m = new Mediador();
-
-        %>
+        <% Mediador m=(Mediador)application.getAttribute("mediadorP");%>
+        
         <section class="container">
             <form>
                 <div class="form-group">

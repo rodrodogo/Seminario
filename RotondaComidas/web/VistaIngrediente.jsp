@@ -14,8 +14,9 @@
         <link rel="stylesheet" type="text/css" media="screen" href="estilos/bootstrap.min.css" />
     </head>
     <body>
+        <% Mediador m=(Mediador)application.getAttribute("mediadorP");%>
         <%!
-            Mediador m = new Mediador();
+            
             String[] consulta = new String[6];                                        
 
         %>

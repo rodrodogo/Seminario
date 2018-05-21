@@ -21,6 +21,7 @@ private ArrayList <Restaurante> rest;
     public boolean guardarDatos(Restaurante r) {
         boolean cre=false;
         for (int i = 0; i < rest.size(); i++) {
+            System.out.println("nombre res=" + rest.get(i).getDireccion());
             if (rest.get(i).getNit()==r.getNit()){
                 cre=true;
             }
@@ -52,8 +53,16 @@ private ArrayList <Restaurante> rest;
     }
     public void borrarDatos(String[] actualizacion){
        
-    }public void obtenerDatos (String[] actualizacion){
-       
+    }
+    public ArrayList<String>  obtenerDatos (){
+       ArrayList<String> res=new ArrayList<String>();
+        for (int i = 0; i < rest.size(); i++) {
+           res.add(rest.get(i).getNombre());
+           res.add(""+rest.get(i).getNit());
+           res.add(rest.get(i).getDueño());
+           
+       }
+        return res;
     }
     
 }

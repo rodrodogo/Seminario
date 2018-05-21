@@ -4,6 +4,7 @@
     Author     : fcher
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="Logica.Mediador"%>
 <%@page import="Logica.GestorRestaurante"%>
@@ -17,8 +18,8 @@
         <link rel="stylesheet" type="text/css" media="screen" href="estilos/bootstrap.min.css" />
     </head>
     <body>
-        <% Mediador m=(Mediador)application.getAttribute("mediadorP");%>
-        
+        <% Mediador m = (Mediador) application.getAttribute("mediadorP");%>
+
         <section class="container">
             <form>
                 <div class="form-group">
@@ -69,7 +70,7 @@
                         actualizacion[2] = request.getParameter("nit");
                         actualizacion[3] = request.getParameter("nombre");
                         actualizacion[4] = request.getParameter("tel");
-                        boolean res = m.registrarRestaurante(actualizacion,2);
+                        boolean res = m.registrarRestaurante(actualizacion, 2);
                         if (res == false) {
                             out.println("<br>Registro Fallido el restaurante no existe");
                         } else {
@@ -78,6 +79,51 @@
                     }
                 %>
             </form>
+            <form>
+
+                <button name ="ver" class="btn btn-link" type ="submit" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Ver restaurante
+                </button>
+
+
+
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nombre </th>
+                            <th scope="col">Nit</th>
+                            <th scope="col">Dueño</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+
+                            <%if (request.getParameter("ver") != null) {
+                                    ArrayList<String> datos = m.obtenerRestaurantes();
+                                    for (int i = 0; i < datos.size(); i+=3) {
+                                             out.println("<tr>");
+                                             out.println("<th scope=\"col\">" +(i+1)+ "</th>");
+                                             out.println("<th scope=\"col\">" +datos.get(i)+ "</th>");
+                                             out.println("<th scope=\"col\">" +datos.get(i+1)+ "</th>");
+                                             out.println("<th scope=\"col\">" +datos.get(i+2)+ "</th>");
+                                             out.println("</tr>");
+                                        }
+                                   
+                                }
+                            %>
+
+
+                        
+
+                    </tbody>
+                </table>
+
+
+
+            </form>
+
         </section>       
         <script src="scripts/jquery-3.2.1.min.js"></script>
         <script src ="scripts/popper.js"></script>

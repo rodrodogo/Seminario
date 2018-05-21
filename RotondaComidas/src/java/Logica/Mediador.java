@@ -33,7 +33,9 @@ public class Mediador {
 
         gInventario.modificarInv(ing);
     }
-
+public ArrayList<String>  obtenerRestaurantes(){
+    return gRestaurante.obtenerDatos();
+}
     public boolean registrarRestaurante(String[] actualizacion, int op) {
         Restaurante r = new Restaurante(actualizacion);
         //operacion de registrar

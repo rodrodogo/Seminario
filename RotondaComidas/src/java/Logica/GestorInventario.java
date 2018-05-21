@@ -18,21 +18,15 @@ public class GestorInventario {
 
     public GestorInventario() {
         ingredientes = new ArrayList<Ingrediente>();
-        Ingrediente a = new Ingrediente(5, "bueno", "a", "a", 1);
-        Ingrediente b = new Ingrediente(5, "bueno", "b", "b", 1);
-        Ingrediente c = new Ingrediente(5, "bueno", "c", "c", 1);
-        Ingrediente d = new Ingrediente(5, "bueno", "d", "d", 1);
-        ingredientes.add(a);
-        ingredientes.add(b);
-        ingredientes.add(c);
-        ingredientes.add(d);
+       
+       
     }
 
     public Ingrediente consultarInv(String busqueda) {
         System.out.println(busqueda);
         for (Ingrediente i : ingredientes) {
 
-            if (i.getNombre().equals(busqueda) || i.getNombre() == busqueda) {
+            if (i.getNombre().equals(busqueda)) {
 
                 return i;
 

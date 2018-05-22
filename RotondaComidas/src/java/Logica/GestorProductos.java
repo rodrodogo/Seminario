@@ -56,7 +56,25 @@ public class GestorProductos {
     }
 
     ArrayList<String> obtenerDatos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<String> res=new ArrayList<String>();
+        for (int i = 0; i < productos.size(); i++) {
+           res.add(productos.get(i).getNombreP());
+           String ingre = "";
+
+            for (int j = 0; j < productos.get(i).getIngredientes().size(); j++) {
+                if (j == productos.get(i).getIngredientes().size() - 1) {
+                    ingre += productos.get(i).getIngredientes().get(j);
+                } else {
+                    ingre += productos.get(i).getIngredientes().get(j) + " ";
+                }
+            }
+                   
+           res.add(ingre);
+           res.add(""+productos.get(i).getPrecio());
+           res.add(""+productos.get(i).isPersonalisable());
+           
+       }
+        return res;
     }
     
 

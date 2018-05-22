@@ -4,6 +4,7 @@
     Author     : Rodrigon
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page import="Logica.Mediador"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -14,10 +15,9 @@
         <link rel="stylesheet" type="text/css" media="screen" href="estilos/bootstrap.min.css" />
     </head>
     <body>
-        <% Mediador m=(Mediador)application.getAttribute("mediadorP");%>
+        <% Mediador m = (Mediador) application.getAttribute("mediadorP");%>
         <%!
-            
-            String[] consulta = new String[4];                                        
+            String[] consulta = new String[4];
 
         %>
         <section class="container">
@@ -47,52 +47,108 @@
 
             </div>
 
+
+
+
+            <script src="scripts/jquery-3.2.1.min.js"></script>
+            <script src ="scripts/popper.js"></script>
+            <script src="scripts/bootstrap.min.js"></script>
+
+
+            <%
+                for (int i = 0; i < 4; i++) {
+                    consulta[i] = "";
+                }
+
+                if (request.getParameter("busIng") != null) {
+
+                    consulta = m.buscarProducto(request.getParameter("nombre"));
+                }
+                if (request.getParameter("registrar") != null) {
+                    String[] actualizacion = new String[6];
+                    actualizacion[0] = request.getParameter("nom");
+                    actualizacion[1] = request.getParameter("categoria");
+                    actualizacion[2] = request.getParameter("cantidad");
+                    actualizacion[3] = request.getParameter("precio");
+
+                    m.registrarProducto(actualizacion);
+
+                }
+
+            %>
+              
+            <form>
+                <div class="form-group">
+                    <label for="direccion">Nombre</label>
+                    <input name ="nom" type="text" class="form-control" id="direccion" required ="true" placeholder="Ingrese el nombre del menu" value="<%=consulta[0]%>">
+
+                </div>
+                <div class="form-group">
+                    <label for="dueño">Ingredientes</label>
+                    <input name ="categoria" type="text" class="form-control" id="dueño" required ="true" placeholder="Ingrese los productos del restaurante" value="<%=consulta[1]%>">
+
+                </div>
+                <div class="form-group">
+                    <label for="nit">Precio</label>
+                    <input name ="cantidad"  type="number" class="form-control" id="nit" required ="true" placeholder="Ingrese el costo del menu" value="<%=consulta[2]%>">
+
+                </div>
+                    <div class="form-group">
+                    <label for="nit">Personalizable</label>
+                    <input name ="precio"  type="text" class="form-control" id="nit" required ="true" placeholder="Ingrese el costo del menu" value="<%=consulta[3]%>">
+
+                </div> 
+                <button type="submit" class="btn btn-primary" name="registrar">Actualizar</button>
+
+
+            </form>
+
+            <form>
+
+                <button name ="ver" class="btn btn-link" type ="submit" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Ver Productos
+                </button>
+
+
+
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nombre </th>
+                            <th scope="col">Productos</th>
+                            <th scope="col">Precio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+
+                        <%if (request.getParameter("ver") != null) {
+                                ArrayList<String> datos = m.obtenerProductos();
+                                for (int i = 0; i < datos.size(); i += 4) {
+                                    out.println("<tr>");
+                                    out.println("<th scope=\"col\">" + (i + 1) + "</th>");
+                                    out.println("<th scope=\"col\">" + datos.get(i) + "</th>");
+                                    out.println("<th scope=\"col\">" + datos.get(i + 1) + "</th>");
+                                    out.println("<th scope=\"col\">" + datos.get(i + 2) + "</th>");
+                                    out.println("<th scope=\"col\">" + datos.get(i + 3) + "</th>");
+                                    out.println("</tr>");
+                                }
+
+                            }
+                        %>
+
+
+
+
+                    </tbody>
+                </table>
+
+
+
+
+            </form>
         </section>
-
-
-        <script src="scripts/jquery-3.2.1.min.js"></script>
-        <script src ="scripts/popper.js"></script>
-        <script src="scripts/bootstrap.min.js"></script>
-
-
-        <%
-            for (int i = 0; i < 4; i++) {
-                        consulta[i] = "";
-                }            
-            
-            if (request.getParameter("busIng") != null) {
-
-                consulta = m.buscarProducto(request.getParameter("nombre"));
-            }
-            if (request.getParameter("actualizarIng") != null) {
-                String[] actualizacion = new String[6];
-                actualizacion[0] = request.getParameter("nom");
-                actualizacion[1] = request.getParameter("categoria");
-                actualizacion[2] = request.getParameter("cantidad");
-                actualizacion[3] = request.getParameter("precio");
-                
-                m.registrarProducto(actualizacion);
-
-            }
-            
-        %>
-        <form>
-            <div>
-
-            Nombre:<input type="text" name="nom" value="<%=consulta[0]%>"> 
-            </br>
-            Ingredientes:<input type="text" name="categoria"value="<%=consulta[1]%>"> 
-            </br>
-            Precio:<input type="text" name="cantidad"value="<%=consulta[2]%>"> 
-            </br>
-            Personalizable<input type="text" name="precio"value="<%=consulta[3]%>"> 
-            </br>            
-
-
-            <input type="submit" name="actualizarIng" value="Enviar">
-            </div>
-        </form>  
-       
-
     </body>
 </html>

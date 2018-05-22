@@ -26,7 +26,7 @@
                     <div class="navbar-na navbar navbar-dark bg-primaryv">
                         <a class="nav-item nav-link" href="VistaRestaurante.jsp">Gestion Restaurantes</a>
                         <a class="nav-item nav-link " href="VistaIngrediente.jsp">Gestion de ingredientes </a>
-                        <a class="nav-item nav-link" href="#">Gestionar menu</a>
+                        <a class="nav-item nav-link" href="VistaMenu.jsp">Gestionar menu</a>
                         <a class="nav-item nav-link" href="VistaProducto.jsp">Gestionar productos</a>
                         <a class="nav-item nav-link " href="#">Consultar Cola de pedidos</a>
                     </div>

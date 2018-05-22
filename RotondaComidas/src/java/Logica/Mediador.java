@@ -17,12 +17,14 @@ public class Mediador {
     private GestorInventario gInventario;
     private GestorRestaurante gRestaurante;
     private GestorProductos gProductos;
+    private GestorMenu gMenu;
 
     public Mediador() {
 
         gInventario = new GestorInventario();
         gRestaurante = new GestorRestaurante();
         gProductos = new GestorProductos();
+        gMenu = new GestorMenu();
 
     }
 
@@ -33,9 +35,15 @@ public class Mediador {
 
         gInventario.modificarInv(ing);
     }
-public ArrayList<String>  obtenerRestaurantes(){
-    return gRestaurante.obtenerDatos();
-}
+
+    public ArrayList<String> obtenerRestaurantes() {
+        return gRestaurante.obtenerDatos();
+    }
+
+    public ArrayList<String> obtenerMenus() {
+        return gMenu.obtenerDatos();
+    }
+
     public boolean registrarRestaurante(String[] actualizacion, int op) {
         Restaurante r = new Restaurante(actualizacion);
         //operacion de registrar
@@ -88,16 +96,16 @@ public ArrayList<String>  obtenerRestaurantes(){
             String[] envio = new String[4];
             envio[0] = busqueda.getNombreP();
             String ingredites = "";
-            
+
             for (int i = 0; i < busqueda.getIngredientes().size(); i++) {
-                if (i == busqueda.getIngredientes().size()-1 ) {
+                if (i == busqueda.getIngredientes().size() - 1) {
                     ingredites += busqueda.getIngredientes().get(i);
-                }else{
+                } else {
                     ingredites += busqueda.getIngredientes().get(i) + " ";
                 }
-                
-            }          
-  
+
+            }
+
             envio[1] = ingredites;
             envio[2] = "" + busqueda.getPrecio();
             envio[3] = "" + busqueda.isPersonalisable();
@@ -113,8 +121,50 @@ public ArrayList<String>  obtenerRestaurantes(){
         for (int i = 0; i < ingredientes.length; i++) {
             arrayIngre.add(ingredientes[i]);
         }
-        System.out.println(actualizacion[0]+actualizacion[1]+actualizacion[2]+actualizacion[3]);
-        Producto pro =  new Producto(actualizacion[0],arrayIngre,JSType.toBoolean(actualizacion[3]),Integer.parseInt(actualizacion[2]));
+        System.out.println(actualizacion[0] + actualizacion[1] + actualizacion[2] + actualizacion[3]);
+        Producto pro = new Producto(actualizacion[0], arrayIngre, JSType.toBoolean(actualizacion[3]), Integer.parseInt(actualizacion[2]));
         gProductos.actualizarProducto(pro);
+    }
+
+    public String[] consultarMenu(String key) {
+        Menu busqueda = gMenu.consultarMenu(key);
+        if (busqueda == null) {
+            String[] envio = new String[3];
+            envio[0] = "no existe";
+            envio[1] = "no existe";
+            envio[2] = "no existe";
+
+            return envio;
+        } else {
+            String[] envio = new String[4];
+            envio[0] = busqueda.getNombre();
+            String productos = "";
+
+            for (int i = 0; i < busqueda.getProductos().size(); i++) {
+                if (i == busqueda.getProductos().size() - 1) {
+                    productos += busqueda.getProductos().get(i);
+                } else {
+                    productos += busqueda.getProductos().get(i) + " ";
+                }
+
+            }
+
+            envio[1] = productos;
+            envio[2] = "" + busqueda.getPrecio();
+
+            return envio;
+        }
+
+    }
+
+    public void gestionarMenu(String[] actualizacion) {
+        String[] productos = actualizacion[1].split(" ");
+        ArrayList<String> arrayPro = new ArrayList<String>();
+        for (int i = 0; i < productos.length; i++) {
+            arrayPro.add(productos[i]);
+        }
+        System.out.println(actualizacion[0] + actualizacion[1] + actualizacion[2] + actualizacion[3]);
+        Menu menutemp = new Menu(actualizacion[0], arrayPro, Integer.parseInt(actualizacion[2]));
+        gMenu.actualizarMenu(menutemp);
     }
 }

@@ -55,4 +55,18 @@ public class GestorInventario {
         }
 
     }
+
+    ArrayList<String> obtenerDatos() {
+        ArrayList<String> res=new ArrayList<String>();
+        for (int i = 0; i < ingredientes.size(); i++) {
+           res.add(ingredientes.get(i).getNombre());
+           res.add(""+ingredientes.get(i).getCategoria());
+           res.add(""+ingredientes.get(i).getCantidad());
+           res.add(""+ingredientes.get(i).getPrecio());
+           res.add(""+ingredientes.get(i).isCambiable());
+           res.add(""+ingredientes.get(i).getCaracteristicas());
+           
+       }
+        return res;
+    }
 }

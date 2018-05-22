@@ -29,6 +29,7 @@ public class Mediador {
     }
 
     public void actualizarIng(String[] actualizacion) {
+        System.out.println("asdada" +actualizacion[0]);
         Ingrediente ing = new Ingrediente(Integer.parseInt(actualizacion[2]),
                 actualizacion[5], actualizacion[1], actualizacion[0],
                 Integer.parseInt(actualizacion[3]));
@@ -42,6 +43,13 @@ public class Mediador {
 
     public ArrayList<String> obtenerMenus() {
         return gMenu.obtenerDatos();
+    }
+    public ArrayList<String> obtenerProductos() {
+        return gProductos.obtenerDatos();
+    }
+    public ArrayList<String> obtenerIngredientes() {
+        
+        return gInventario.obtenerDatos();
     }
 
     public boolean registrarRestaurante(String[] actualizacion, int op) {

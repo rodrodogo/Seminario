@@ -18,14 +18,15 @@ public class Mediador {
     private GestorRestaurante gRestaurante;
     private GestorProductos gProductos;
     private GestorMenu gMenu;
+    private GestorFactura gVentas;
 
     public Mediador() {
 
         gInventario = new GestorInventario();
         gRestaurante = new GestorRestaurante();
         gProductos = new GestorProductos();
+        gVentas = new GestorFactura();
         gMenu = new GestorMenu();
-
     }
 
     public void actualizarIng(String[] actualizacion) {
@@ -50,6 +51,21 @@ public class Mediador {
     public ArrayList<String> obtenerIngredientes() {
         
         return gInventario.obtenerDatos();
+    }
+    
+    public ArrayList<String> obtenerOrdenes() {
+        Producto pizza = gProductos.consultarInv("pizza");
+        String [] venta= new String[4] ;
+        venta[0]="2305180001";
+        venta[1]= "0.20";
+        venta[2]="20 de mayo 1996";
+        venta[3]="Luis Mendez";
+        gVentas.añadirProducto(pizza,venta);
+        pizza = gProductos.consultarInv("pizza2");
+        venta[0]="2305180002";
+        gVentas.añadirProducto(pizza,venta);
+        gVentas.terminarVenta("2305180001");
+        return gVentas.obtenerDatos();
     }
 
     public boolean registrarRestaurante(String[] actualizacion, int op) {

@@ -19,7 +19,11 @@ public class GestorProductos {
         productos = new ArrayList<Producto>();
         ArrayList<String> ingre = new ArrayList<String>();
         ingre.add("arina");
+        ingre.add("tomate");
+        ingre.add("piña");
         Producto a = new Producto("pizza", ingre, false, 5000);
+        productos.add(a);
+         a = new Producto("pizza2", ingre, false, 10000);
         productos.add(a);
     }
     
@@ -77,5 +81,5 @@ public class GestorProductos {
         return res;
     }
     
-
+    
 }

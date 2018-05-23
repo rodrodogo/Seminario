@@ -1,0 +1,9 @@
+body {
+    background-image: url("http://vinotintovalencia.com/wp-content/uploads/2014/06/fondo-vinotinto-valencia-1.jpg");
+    background-repeat:  repeat;
+color: blue;
+    font: 16px "Comic Sans MS", cursive;
+}
+section > .container{
+    font-size: 3em;
+}

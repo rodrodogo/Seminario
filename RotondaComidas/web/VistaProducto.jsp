@@ -13,6 +13,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Productos</title>
         <link rel="stylesheet" type="text/css" media="screen" href="estilos/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" media="screen" href="estilos/estilos.css" />
     </head>
     <body>
         <% Mediador m = (Mediador) application.getAttribute("mediadorP");%>
@@ -20,6 +21,21 @@
             String[] consulta = new String[4];
 
         %>
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+                <a class="navbar-brand" href="index.jsp">Tu Rotonda</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-na navbar navbar-dark "  >
+                        <a class="nav-item nav-link" href="VistaRestaurante.jsp">Gestion Restaurantes</a>                        
+                        <a class="nav-item nav-link" href="VistaMenu.jsp">Gestionar menu</a>
+                        <a class="nav-item nav-link" href="VistaProducto.jsp">Gestionar productos</a>
+                        <a class="nav-item nav-link " href="VistaIngrediente.jsp">Gestion de ingredientes </a>
+                        <a class="nav-item nav-link " href="#">Consultar Cola de pedidos</a>
+                    </div>
+                </div>
+            </nav>
         <section class="container">
             <article class="jumbotron">
                 <h1>Seccion de busqueda</h1>
@@ -76,7 +92,8 @@
                 }
 
             %>
-              
+            <section class ="row">
+                <section class="col-sm-4 offset-sm-4">  
             <form>
                 <div class="form-group">
                     <label for="direccion">Nombre</label>
@@ -102,10 +119,11 @@
 
 
             </form>
-
+                </section>
+            </section>
             <form>
 
-                <button name ="ver" class="btn btn-link" type ="submit" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <button name ="ver" class="btn btn-primary bg-success" type ="submit" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                     Ver Productos
                 </button>
 

@@ -15,11 +15,26 @@ public class GestorFactura {
 
     private ArrayList<Producto> productos;
     private ArrayList<Factura> venta;
+    private ArrayList<Producto> tempProducto;
 
     public GestorFactura() {
 
         productos = new ArrayList<>();
         venta = new ArrayList<>();
+        tempProducto = new ArrayList<>();
+    }
+    
+    public void añadirACarrito(Producto pro){
+       tempProducto.add(pro);
+        System.out.println("añadi"+ pro.getNombreP());
+        
+    }
+    
+    public void borrarACarrito(Producto pro){
+    }
+    
+    public void finalizarCarrito(){
+        
     }
 
     public boolean añadirProducto(Producto in, String[] aVenta) {
@@ -38,7 +53,7 @@ public class GestorFactura {
     }
 
     public int obtenerValor(String busqueda) {
-        System.out.println(busqueda);
+        
         for (int i = 0; i < productos.size(); i++) {
             if (productos.get(i).getNombreP().equals(busqueda) || productos.get(i).getNombreP() == busqueda) {
                 return venta.get(i).getValorCompra();

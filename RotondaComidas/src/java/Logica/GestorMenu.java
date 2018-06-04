@@ -17,9 +17,7 @@ public class GestorMenu {
     public GestorMenu() {
         menus = new ArrayList<Menu>();
         ArrayList<String> product = new ArrayList<String>();
-        product.add("arina");
-        Menu a = new Menu("Combo1", product, 5000);
-        menus.add(a);
+        
     }
     
     public Menu consultarMenu(String busqueda) {

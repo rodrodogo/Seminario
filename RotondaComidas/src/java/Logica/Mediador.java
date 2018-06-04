@@ -27,10 +27,12 @@ public class Mediador {
         gProductos = new GestorProductos();
         gVentas = new GestorFactura();
         gMenu = new GestorMenu();
+
+        machete();
+
     }
 
     public void actualizarIng(String[] actualizacion) {
-        System.out.println("asdada" +actualizacion[0]);
         Ingrediente ing = new Ingrediente(Integer.parseInt(actualizacion[2]),
                 actualizacion[5], actualizacion[1], actualizacion[0],
                 Integer.parseInt(actualizacion[3]));
@@ -45,25 +47,41 @@ public class Mediador {
     public ArrayList<String> obtenerMenus() {
         return gMenu.obtenerDatos();
     }
+
     public ArrayList<String> obtenerProductos() {
         return gProductos.obtenerDatos();
     }
+
     public ArrayList<String> obtenerIngredientes() {
-        
+
         return gInventario.obtenerDatos();
     }
-    
+
+    public void añadirProductoCarrito(String nombre, String cantidad) {
+        Menu temp = gMenu.consultarMenu(nombre);
+        ArrayList<String> arrayProductos = temp.getProductos();
+        for (int j = 0; j < Integer.parseInt(cantidad); j++) {
+            for (int i = 0; i < arrayProductos.size(); i++) {
+                
+                Producto tempPro = gProductos.consultarInv(arrayProductos.get(i));
+
+                gVentas.añadirACarrito(tempPro);
+            }
+        }
+
+    }
+
     public ArrayList<String> obtenerOrdenes() {
         Producto pizza = gProductos.consultarInv("pizza");
-        String [] venta= new String[4] ;
-        venta[0]="2305180001";
-        venta[1]= "0.20";
-        venta[2]="20 de mayo 1996";
-        venta[3]="Luis Mendez";
-        gVentas.añadirProducto(pizza,venta);
+        String[] venta = new String[4];
+        venta[0] = "2305180001";
+        venta[1] = "0.20";
+        venta[2] = "20 de mayo 1996";
+        venta[3] = "Luis Mendez";
+        gVentas.añadirProducto(pizza, venta);
         pizza = gProductos.consultarInv("pizza2");
-        venta[0]="2305180002";
-        gVentas.añadirProducto(pizza,venta);
+        venta[0] = "2305180002";
+        gVentas.añadirProducto(pizza, venta);
         gVentas.terminarVenta("2305180001");
         return gVentas.obtenerDatos();
     }
@@ -190,5 +208,18 @@ public class Mediador {
         System.out.println(actualizacion[0] + actualizacion[1] + actualizacion[2] + actualizacion[3]);
         Menu menutemp = new Menu(actualizacion[0], arrayPro, Integer.parseInt(actualizacion[2]));
         gMenu.actualizarMenu(menutemp);
+    }
+
+    private void machete() {
+        Ingrediente in = new Ingrediente(10, "listo", "base", "arina", 1000);
+        gInventario.modificarInv(in);
+        ArrayList<String> ingre = new ArrayList<String>();
+        ingre.add("arina");
+        Producto pro = new Producto("pizza", ingre, true, 0);
+        gProductos.actualizarProducto(pro);
+        ArrayList<String> prodi = new ArrayList<String>();
+        prodi.add("pizza");
+        Menu men = new Menu("Combo1", prodi, 1000);
+        gMenu.actualizarMenu(men);
     }
 }

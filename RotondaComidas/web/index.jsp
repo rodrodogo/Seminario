@@ -43,7 +43,8 @@
                     <img class="d-block w-100 img-fluid" style="width:300px ; height:500px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSamqO4OBPlFGpjTIQbmZ983rAsS_jkLqiWNFYYOJlk7bz7UcZYgA" alt="First slide">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>Pide algo delicioso</h5>
-                        <p>Comida Rapida</p>
+                        
+                       
                     </div>
                 </div>
                 <div class="carousel-item ">
@@ -90,7 +91,7 @@
               <span class="sr-only">Next</span>
             </a> -->
         </div> 
-
+ <a class="nav-item nav-link " href="VistaCompras.jsp">Realiza tu compra</a>
     </section>
 
     <script src="scripts/jquery-3.2.1.min.js"></script>

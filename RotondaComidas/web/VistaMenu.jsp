@@ -18,21 +18,21 @@
     <body>
         <% Mediador m = (Mediador) application.getAttribute("mediadorP");
             String[] consulta = new String[3];%>
-<nav class="navbar navbar-expand-lg navbar-light "  style="background-color: #e3f2fd;">
-                <a class="navbar-brand" href="index.jsp">Tu Rotonda</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-na navbar navbar-dark ">
-                        <a class="nav-item nav-link" href="VistaRestaurante.jsp">Gestion Restaurantes</a>                        
-                        <a class="nav-item nav-link" href="VistaMenu.jsp">Gestionar menu</a>
-                        <a class="nav-item nav-link" href="VistaProducto.jsp">Gestionar productos</a>
-                        <a class="nav-item nav-link " href="VistaIngrediente.jsp">Gestion de ingredientes </a>
-                        <a class="nav-item nav-link " href="VistaConsultarColaPedidos.jsp">Consultar Cola de pedidos</a>
-                    </div>
+        <nav class="navbar navbar-expand-lg navbar-light "  style="background-color: #e3f2fd;">
+            <a class="navbar-brand" href="index.jsp">Tu Rotonda</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-na navbar navbar-dark ">
+                    <a class="nav-item nav-link" href="VistaRestaurante.jsp">Gestion Restaurantes</a>                        
+                    <a class="nav-item nav-link" href="VistaMenu.jsp">Gestionar menu</a>
+                    <a class="nav-item nav-link" href="VistaProducto.jsp">Gestionar productos</a>
+                    <a class="nav-item nav-link " href="VistaIngrediente.jsp">Gestion de ingredientes </a>
+                    <a class="nav-item nav-link " href="VistaConsultarColaPedidos.jsp">Consultar Cola de pedidos</a>
                 </div>
-            </nav>
+            </div>
+        </nav>
         <section class="container">
             <article class="jumbotron">
                 <h1>Seccion de busqueda</h1>
@@ -74,38 +74,37 @@
                     actualizacion[0] = request.getParameter("nombre");
                     actualizacion[1] = request.getParameter("productos");
                     actualizacion[2] = request.getParameter("precio");
-                    
 
                     m.gestionarMenu(actualizacion);
 
                 }
 
             %>
-<section class ="row">
+            <section class ="row">
                 <section class="col-sm-4 offset-sm-4">  
-            <form>
-                <div class="form-group">
-                    <label for="direccion">Nombre</label>
-                    <input name ="nombre" type="text" class="form-control" id="direccion" required ="true" placeholder="Ingrese el nombre del menu" value="<%=consulta[0]%>">
+                    <form>
+                        <div class="form-group">
+                            <label for="direccion">Nombre</label>
+                            <input name ="nombre" type="text" class="form-control" id="direccion" required ="true" placeholder="Ingrese el nombre del menu" value="<%=consulta[0]%>">
 
-                </div>
-                <div class="form-group">
-                    <label for="dueño">Productos</label>
-                    <input name ="productos" type="text" class="form-control" id="dueño" required ="true" placeholder="Ingrese los productos del restaurante" value="<%=consulta[1]%>">
+                        </div>
+                        <div class="form-group">
+                            <label for="dueño">Productos</label>
+                            <input name ="productos" type="text" class="form-control" id="dueño" required ="true" placeholder="Ingrese los productos del restaurante" value="<%=consulta[1]%>">
 
-                </div>
-                <div class="form-group">
-                    <label for="nit">Precio</label>
-                    <input name ="precio"  type="number" class="form-control" id="nit" required ="true" placeholder="Ingrese el costo del menu" value="<%=consulta[2]%>">
+                        </div>
+                        <div class="form-group">
+                            <label for="nit">Precio</label>
+                            <input name ="precio"  type="number" class="form-control" id="nit" required ="true" placeholder="Ingrese el costo del menu" value="<%=consulta[2]%>">
 
-                </div>                
-                <button type="submit" class="btn btn-primary" name="registrar">Actualizar</button>
-                
-                
-            </form>
+                        </div>                
+                        <button type="submit" class="btn btn-primary" name="registrar">Actualizar</button>
+
+
+                    </form>
                 </section>
-</section>
-                    
+            </section>
+
             <form>
 
                 <button name ="ver" class="btn btn-primary bg-success" type ="submit" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">

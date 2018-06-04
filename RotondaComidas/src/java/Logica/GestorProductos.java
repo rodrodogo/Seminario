@@ -17,14 +17,7 @@ public class GestorProductos {
 
     public GestorProductos() {
         productos = new ArrayList<Producto>();
-        ArrayList<String> ingre = new ArrayList<String>();
-        ingre.add("arina");
-        ingre.add("tomate");
-        ingre.add("piña");
-        Producto a = new Producto("pizza", ingre, false, 5000);
-        productos.add(a);
-         a = new Producto("pizza2", ingre, false, 10000);
-        productos.add(a);
+        
     }
     
     public Producto consultarInv(String busqueda) {

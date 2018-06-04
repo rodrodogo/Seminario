@@ -40,9 +40,6 @@
         <section class="container">
             <form>
 
-                <button name ="ver" class="btn btn-primary bg-success" type ="submit" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    Ver Menus
-                </button>
                 <table class="table">
                     <thead>
                         <tr>
@@ -59,6 +56,7 @@
 
                         <%
                             ArrayList<String> datos = m.obtenerMenus();
+
                             for (int i = 0; i < datos.size(); i += 3) {
                                 out.println("<tr>");
                                 out.println("<th scope=\"col\">" + (i + 1) + "</th>");
@@ -66,27 +64,20 @@
                                 out.println("<th scope=\"col\">" + datos.get(i + 1) + "</th>");
                                 out.println("<th scope=\"col\">" + datos.get(i + 2) + "</th>");
                                 out.println("<th scope=\"col\"> <button name =\"" + i + "\" class=\"btn btn-primary bg-success\" type =\"submit\" data-toggle=\"collapse\" data-target=\"#collapseOne\" aria-expanded=\"true\" aria-controls=\"collapseOne\"> Añadir </button>" + "</th>");
-                                out.println("<th scope=\"col\"><input name =\"c"+i +"\"  type=\"number\"  placeholder=\"cantidad\" value=\"\"></th>");
+                                out.println("<th scope=\"col\"><input name =\"c" + i + "\"  type=\"number\"  placeholder=\"cantidad\" value=\"\"></th>");
                                 out.println("</tr>");
 
                             }
 
 
                         %>
-                        <%                            
-                            for (int i = 0; i < datos.size(); i++) {
-                                if (request.getParameter(""+i) != null) {
-                                    out.println(datos.get(i));                                    
-                                    m.añadirProductoCarrito(datos.get(i), request.getParameter("c"+i));
-                                    out.println("<th scope=\"col\"> <button name =\"x" + i + "\" class=\"btn btn-primary bg-success\" type =\"submit\" data-toggle=\"collapse\" data-target=\"#collapseOne\" aria-expanded=\"true\" aria-controls=\"collapseOne\"> X </button>" + "</th>");
-                                }
-                            }
-                            for (int i = 0; i < datos.size(); i++) {
-                                if (request.getParameter("x"+i) != null) {
-                                    out.println("dos");                                    
-                                }
-                            }
+                        <%                            for (int i = 0; i < datos.size(); i++) {
+                                if (request.getParameter("" + i) != null) {
+                                    out.println(datos.get(i));
+                                    m.añadirProductoCarrito(datos.get(i), request.getParameter("c" + i));
 
+                                }
+                            }
 
 
                         %>
@@ -96,6 +87,55 @@
 
                     </tbody>
                 </table>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col" >#</th>
+                            <th scope="col">Nombre </th>
+                            <th scope="col">Menu</th>
+                            <th scope="col">Precio</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+
+                        <%                            ArrayList<String> temp = m.tempCarrito();
+                            if (!temp.isEmpty()) {
+                                for (int i = 0; i < temp.size(); i++) {
+                                    out.println("<tr>");
+                                    out.println("<th scope=\"col\">" + (i + 1) + "</th>");
+                                    out.println("<th scope=\"col\">" + temp.get(i) + "</th>");
+                                    out.println("<th scope=\"col\"> <button name =\"x" + i + "\" class=\"btn btn-primary bg-success\" type =\"submit\" data-toggle=\"collapse\" data-target=\"#collapseOne\" aria-expanded=\"true\" aria-controls=\"collapseOne\" \"> X </button>" + "</th>");
+                                    out.println("</tr>");
+
+                                }
+                            }
+                            for (int i = 0; i < temp.size(); i++) {
+                                if (request.getParameter("x" + i) != null) {
+                                    m.eliminarProductoCarrito(i);
+                                    out.println("dos");
+
+                                }
+                            }
+
+
+                        %>
+
+
+
+
+                    </tbody>
+                </table>
+                <button name ="finalizar" class="btn btn-primary bg-success" type ="submit" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Finalizar Orden
+                </button> 
+                <%                    
+                    if (request.getParameter("finalizar") != null) {
+                        m.finalizarOrden();
+                    }
+                %>
             </form>
         </section> 
     </body>

@@ -26,15 +26,24 @@ public class GestorFactura {
     
     public void añadirACarrito(Producto pro){
        tempProducto.add(pro);
-        System.out.println("añadi"+ pro.getNombreP());
+       
         
     }
     
     public void borrarACarrito(Producto pro){
+        tempProducto.remove(pro);
     }
     
     public void finalizarCarrito(){
-        
+        String[] venta = new String[4];
+        venta[0] = "2305180001";
+        venta[1] = "0.20";
+        venta[2] = "20 de mayo 1996";
+        venta[3] = "Luis Mendez";
+        for (int i = 0; i < tempProducto.size(); i++) {
+            añadirProducto(tempProducto.get(i), venta);
+        }
+        tempProducto.clear();
     }
 
     public boolean añadirProducto(Producto in, String[] aVenta) {

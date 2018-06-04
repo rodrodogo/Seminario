@@ -19,6 +19,8 @@ public class Mediador {
     private GestorProductos gProductos;
     private GestorMenu gMenu;
     private GestorFactura gVentas;
+    
+    private ArrayList<String> tempMenu;
 
     public Mediador() {
 
@@ -27,7 +29,7 @@ public class Mediador {
         gProductos = new GestorProductos();
         gVentas = new GestorFactura();
         gMenu = new GestorMenu();
-
+        tempMenu = new ArrayList<>();
         machete();
 
     }
@@ -59,8 +61,10 @@ public class Mediador {
 
     public void añadirProductoCarrito(String nombre, String cantidad) {
         Menu temp = gMenu.consultarMenu(nombre);
+        
         ArrayList<String> arrayProductos = temp.getProductos();
         for (int j = 0; j < Integer.parseInt(cantidad); j++) {
+            tempMenu.add(nombre);
             for (int i = 0; i < arrayProductos.size(); i++) {
                 
                 Producto tempPro = gProductos.consultarInv(arrayProductos.get(i));
@@ -71,9 +75,26 @@ public class Mediador {
 
     }
     
-    public void eliminarProductoCarrito(){
+    public ArrayList<String> tempCarrito(){
+        return tempMenu;
+    }
+    
+    public void eliminarProductoCarrito(int index){
+        Menu temp = gMenu.consultarMenu(tempMenu.get(index));
+        ArrayList<String> arrayProductos = temp.getProductos();
+        for (int i = 0; i < arrayProductos.size(); i++) {
+                
+                Producto tempPro = gProductos.consultarInv(arrayProductos.get(i));
+
+                gVentas.borrarACarrito(tempPro);
+            }
+    }
+    public void finalizarOrden(){
+        gVentas.finalizarCarrito();
+        tempMenu.clear();
     }
 
+    
     public ArrayList<String> obtenerOrdenes() {
         Producto pizza = gProductos.consultarInv("pizza");
         String[] venta = new String[4];

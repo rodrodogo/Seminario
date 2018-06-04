@@ -131,9 +131,10 @@
                 <button name ="finalizar" class="btn btn-primary bg-success" type ="submit" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                     Finalizar Orden
                 </button> 
-                <%                    
-                    if (request.getParameter("finalizar") != null) {
+                <%                    if (request.getParameter("finalizar") != null) {
                         m.finalizarOrden();
+                        String redirectURL = "index.jsp";
+                        response.sendRedirect(redirectURL);
                     }
                 %>
             </form>

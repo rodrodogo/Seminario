@@ -70,6 +70,9 @@ public class Mediador {
         }
 
     }
+    
+    public void eliminarProductoCarrito(){
+    }
 
     public ArrayList<String> obtenerOrdenes() {
         Producto pizza = gProductos.consultarInv("pizza");
@@ -221,5 +224,16 @@ public class Mediador {
         prodi.add("pizza");
         Menu men = new Menu("Combo1", prodi, 1000);
         gMenu.actualizarMenu(men);
+        
+        Ingrediente ina = new Ingrediente(10, "listo", "base", "arroz", 1000);
+        gInventario.modificarInv(ina);
+        ArrayList<String> ingres = new ArrayList<String>();
+        ingres.add("arroz");
+        Producto pros = new Producto("arroz", ingres, true, 0);
+        gProductos.actualizarProducto(pros);
+        ArrayList<String> prodis = new ArrayList<String>();
+        prodis.add("arroz");
+        Menu mens = new Menu("Combo2", prodis, 1000);
+        gMenu.actualizarMenu(mens);
     }
 }

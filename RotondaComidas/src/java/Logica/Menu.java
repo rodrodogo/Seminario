@@ -17,9 +17,10 @@ public class Menu {
     private ArrayList<String> productos;    
     private int precio;
 
-    public Menu(String nombre, ArrayList<String> productos, int precio) {
+    public Menu(String nombre, String productos, int precio) {
         this.nombre = nombre;
-        this.productos = productos;
+        this.productos = new ArrayList<>();
+        this.productos.add(productos);
         this.precio = precio;
     }
 
@@ -46,7 +47,9 @@ public class Menu {
     public void setPrecio(int precio) {
         this.precio = precio;
     }
-    
+    public void agregarProducto(String p){
+        productos.add(p);
+    }
     
 
 }

@@ -80,34 +80,124 @@
                 }
 
             %>
-            <section class ="row">
-                <section class="col-sm-4 offset-sm-4">  
-                    <form>
-                        <div class="form-group">
-                            <label for="direccion">Nombre</label>
-                            <input name ="nombre" type="text" class="form-control" id="direccion" required ="true" placeholder="Ingrese el nombre del menu" value="<%=consulta[0]%>">
+            <div id="accordion" role="tablist">
+                <div class="card">
+                    <div class="card-header" role="tab" id="headingOne">
+                        <h5 class="mb-0">
+                            <a data-toggle="collapse" href="#collapse2" role="button" aria-expanded="true" aria-controls="collapseOne">
+                                Cree un menu
+                            </a>
+                        </h5>
+                    </div>
 
-                        </div>
-                        <div class="form-group">
-                            <label for="dueño">Productos</label>
-                            <input name ="productos" type="text" class="form-control" id="dueño" required ="true" placeholder="Ingrese los productos del restaurante" value="<%=consulta[1]%>">
+                    <div id="collapse2" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
 
-                        </div>
-                        <div class="form-group">
-                            <label for="nit">Precio</label>
-                            <input name ="precio"  type="number" class="form-control" id="nit" required ="true" placeholder="Ingrese el costo del menu" value="<%=consulta[2]%>">
+                        <section class ="row">
 
-                        </div>                
-                        <button type="submit" class="btn btn-primary" name="registrar">Actualizar</button>
+                            <section class="col-sm-4 offset-sm-4">  
+                                <form>
+                                    <div class="form-group">
+                                        <label for="nombre">Nombre</label>
+                                        <input name ="nombre" type="text" class="form-control" id="direccion" required ="true" placeholder="Ingrese el nombre del menu" value="<%=consulta[0]%>">
+
+                                    </div>
+
+                                    <label for="productos">Productos</label>
+                                    <!---<input name ="productos" type="text" class="form-control" id="dueño" required ="true" placeholder="Ingrese los productos del restaurante" value="<%=consulta[1]%>"> -->
+                                    <select class="custom-select form-control" name ="productos">
 
 
-                    </form>
-                </section>
-            </section>
+                                        <%
+                                            ArrayList<String> prod = m.obtenerProductos();
+                                            for (int i = 0; i < prod.size(); i += 4) {
+                                                out.println("<option class= \"\" value =" + prod.get(i) + ">" + prod.get(i) + "</option>");
+                                            }
+                                        %>
+                                    </select>
 
+                                    <div class="form-group">
+                                        <label for="precio">Precio</label>
+                                        <input name ="precio"  type="number" class="form-control" id="nit" required ="true" placeholder="Ingrese el costo del menu" value="<%=consulta[2]%>">
+
+                                    </div>                
+                                    <button type="submit" class="btn btn-primary" name="registrar">Actualizar</button>
+
+
+                                </form>
+
+                            </section>
+
+
+                        </section>
+                    </div>
+                </div>
+            </div>
+
+            <div id="accordion" role="tablist">
+                <div class="card">
+                    <div class="card-header" role="tab" id="heading3">
+                        <h5 class="mb-0">
+                            <a data-toggle="collapse" href="#collapse3" role="button" aria-expanded="true" aria-controls="collapseOne">
+                                Cree un menu
+                            </a>
+                        </h5>
+                    </div>
+
+                    <div id="collapse3" class="collapse show" role="tabpanel" aria-labelledby="heading3" data-parent="#accordion">
+
+                        <section class ="row">
+
+                            <section class="col-sm-4 offset-sm-4">  
+                                <form>
+                                    <div class="form-group">
+                                        <label for="nombreM">Nombre</label>
+                                        <select class="custom-select form-control" name ="nombreM">
+                                            <%
+                                                ArrayList<String> m2 = m.obtenerMenus();
+
+                                                for (int i = 0; i < m2.size(); i += 4) {
+                                                    out.println("<option class= \"\" value =" + m2.get(i) + ">" + m2.get(i) + "</option>");
+                                                }
+                                            %>
+                                        </select>
+
+                                    </div>
+
+                                    <label for="productosA">Productos</label>
+                                    <!---<input name ="productos" type="text" class="form-control" id="dueño" required ="true" placeholder="Ingrese los productos del restaurante" value="<%=consulta[1]%>"> -->
+                                    <select class="custom-select form-control" name ="productosA">
+
+                                        <%
+                                            ArrayList<String> prod2 = m.obtenerProductos();
+                                            for (int i = 0; i < prod.size(); i += 4) {
+                                                out.println("<option class= \"\" value =" + prod2.get(i) + ">" + prod2.get(i) + "</option>");
+                                            }
+                                        %>
+                                    </select>
+                                    <%if (request.getParameter("AgregarP") != null) {
+                                            String p = request.getParameter("productosA");
+                                            String menu = request.getParameter("nombreM");
+                                            m.productoAMenu(p, menu);
+                                        }
+
+                                    %>
+
+
+                                    <button type="submit" class="btn btn-primary" name="AgregarP">Agregar Producto</button>
+
+
+                                </form>
+
+                            </section>
+
+
+                        </section>
+                    </div>
+                </div>
+            </div>
             <form>
 
-                <button name ="ver" class="btn btn-primary bg-success" type ="submit" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <button name ="ver" class="btn btn-primary bg-success" type ="submit" >
                     Ver Menus
                 </button>
 
@@ -126,7 +216,8 @@
                     <tbody>
 
 
-                        <%if (request.getParameter("ver") != null) {
+                        <%                            
+                            if (request.getParameter("ver") != null) {
                                 ArrayList<String> datos = m.obtenerMenus();
                                 for (int i = 0; i < datos.size(); i += 3) {
                                     out.println("<tr>");

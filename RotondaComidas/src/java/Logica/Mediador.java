@@ -30,7 +30,7 @@ public class Mediador {
         gVentas = new GestorFactura();
         gMenu = new GestorMenu();
         tempMenu = new ArrayList<>();
-        machete();
+        System.out.println("la wea team");
 
     }
 
@@ -52,6 +52,9 @@ public class Mediador {
 
     public ArrayList<String> obtenerProductos() {
         return gProductos.obtenerDatos();
+    }
+    public void productoAMenu(String p, String M){
+      gMenu.agregarProducto(p, M);
     }
 
     public ArrayList<String> obtenerIngredientes() {
@@ -224,37 +227,33 @@ public class Mediador {
     }
 
     public void gestionarMenu(String[] actualizacion) {
-        String[] productos = actualizacion[1].split(" ");
-        ArrayList<String> arrayPro = new ArrayList<String>();
-        for (int i = 0; i < productos.length; i++) {
-            arrayPro.add(productos[i]);
-        }
-        System.out.println(actualizacion[0] + actualizacion[1] + actualizacion[2] + actualizacion[3]);
-        Menu menutemp = new Menu(actualizacion[0], arrayPro, Integer.parseInt(actualizacion[2]));
+        String producto = actualizacion[1];
+       
+        Menu menutemp = new Menu(actualizacion[0], producto, Integer.parseInt(actualizacion[2]));
         gMenu.actualizarMenu(menutemp);
     }
 
-    private void machete() {
-        Ingrediente in = new Ingrediente(10, "listo", "base", "arina", 1000);
-        gInventario.modificarInv(in);
-        ArrayList<String> ingre = new ArrayList<String>();
-        ingre.add("arina");
-        Producto pro = new Producto("pizza", ingre, true, 0);
-        gProductos.actualizarProducto(pro);
-        ArrayList<String> prodi = new ArrayList<String>();
-        prodi.add("pizza");
-        Menu men = new Menu("Combo1", prodi, 1000);
-        gMenu.actualizarMenu(men);
-        
-        Ingrediente ina = new Ingrediente(10, "listo", "base", "arroz", 1000);
-        gInventario.modificarInv(ina);
-        ArrayList<String> ingres = new ArrayList<String>();
-        ingres.add("arroz");
-        Producto pros = new Producto("arroz", ingres, true, 0);
-        gProductos.actualizarProducto(pros);
-        ArrayList<String> prodis = new ArrayList<String>();
-        prodis.add("arroz");
-        Menu mens = new Menu("Combo2", prodis, 1000);
-        gMenu.actualizarMenu(mens);
-    }
+//    private void machete() {
+//        Ingrediente in = new Ingrediente(10, "listo", "base", "arina", 1000);
+//        gInventario.modificarInv(in);
+//        ArrayList<String> ingre = new ArrayList<String>();
+//        ingre.add("arina");
+//        Producto pro = new Producto("pizza", ingre, true, 0);
+//        gProductos.actualizarProducto(pro);
+//        ArrayList<String> prodi = new ArrayList<String>();
+//        prodi.add("pizza");
+//        Menu men = new Menu("Combo1", prodi, 1000);
+//        gMenu.actualizarMenu(men);
+//        
+//        Ingrediente ina = new Ingrediente(10, "listo", "base", "arroz", 1000);
+//        gInventario.modificarInv(ina);
+//        ArrayList<String> ingres = new ArrayList<String>();
+//        ingres.add("arroz");
+//        Producto pros = new Producto("arroz", ingres, true, 0);
+//        gProductos.actualizarProducto(pros);
+//        ArrayList<String> prodis = new ArrayList<String>();
+//        prodis.add("arroz");
+//        Menu mens = new Menu("Combo2", prodis, 1000);
+//        gMenu.actualizarMenu(mens);
+//    }
 }

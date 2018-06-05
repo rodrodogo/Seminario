@@ -20,7 +20,7 @@
     </head>
     <body>
         <% Mediador m = (Mediador) application.getAttribute("mediadorP");%>
-        <nav class="navbar navbar-expand-lg navbar-light navbar-light" style="background-color: #e3f2fd;">
+            <nav class="navbar navbar-expand-lg navbar-light navbar-light" style="background-color: #e3f2fd;">
             <a class="navbar-brand" href="index.jsp">Tu Rotonda</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -36,6 +36,7 @@
             </div>
         </nav>
         <section class="container">
+        
             <section class ="row">
                 <section class="col-sm-4 offset-sm-4">
                     <form>
@@ -99,7 +100,7 @@
                     <form>
                 </section>
             </section>
-            <button name ="ver" class="btn btn-primary bg-warning" type ="submit" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <button name ="ver" class="btn btn-primary bg-warning" type ="submit" >
                 Ver restaurantes
             </button>
 

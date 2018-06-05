@@ -12,14 +12,15 @@ import java.util.ArrayList;
  * @author Rodrigon
  */
 public class GestorMenu {
+
     private ArrayList<Menu> menus;
 
     public GestorMenu() {
         menus = new ArrayList<Menu>();
         ArrayList<String> product = new ArrayList<String>();
-        
+
     }
-    
+
     public Menu consultarMenu(String busqueda) {
         System.out.println(busqueda);
         for (Menu i : menus) {
@@ -33,9 +34,8 @@ public class GestorMenu {
 
         return null;
     }
-    
-    public void actualizarMenu(Menu in) {
 
+    public void actualizarMenu(Menu in) {
 
         Menu temp = consultarMenu(in.getNombre());
 
@@ -44,33 +44,38 @@ public class GestorMenu {
 
         } else {
             temp.setNombre(in.getNombre());
-            temp.setProductos(in.getProductos());            
+            temp.setProductos(in.getProductos());
             temp.setPrecio(in.getPrecio());
-            
+
         }
 
     }
 
-    public ArrayList<String>  obtenerDatos (){
-       ArrayList<String> res=new ArrayList<String>();
+    public ArrayList<String> obtenerDatos() {
+        ArrayList<String> res = new ArrayList<String>();
         for (int i = 0; i < menus.size(); i++) {
-           res.add(menus.get(i).getNombre());
-           String productos = "";
-
-            for (int j = 0; j < menus.get(i).getProductos().size(); j++) {
-                if (j == menus.get(i).getProductos().size() - 1) {
-                    productos += menus.get(i).getProductos().get(j);
-                } else {
-                    productos += menus.get(i).getProductos().get(j) + " ";
-                }
-
+            res.add(menus.get(i).getNombre());
+            String productos = "";
+            Menu temp= menus.get(i);
+            ArrayList<String> st=temp.getProductos();
+            for (String p: st){
+                productos=productos +"\n"+p;
             }
-                   
-           res.add(productos);
-           res.add(""+menus.get(i).getPrecio());
-           
-       }
+
+            res.add(productos);
+            res.add("" + menus.get(i).getPrecio());
+
+        }
         return res;
     }
-    
+
+    public void agregarProducto(String p, String menu) {
+        for (Menu temp : menus) {
+            if (temp.getNombre().equals(menu)){
+               temp.agregarProducto(p);
+                System.out.println("SI agregadp");
+                System.out.println("tma "+ temp.getProductos().size());
+            }
+        }
+    }
 }

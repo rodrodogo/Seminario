@@ -86,6 +86,32 @@ public class GestorDatos {
         return productos;
     }
     
+    public ArrayList<String> leerProductosFactura() {
+        Connection c = realizaConexion();
+        Statement stmt = null;
+        ArrayList<String> productos = new ArrayList();
+        try {
+            stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM producto;");
+            while (rs.next()) {
+                String producto = new String();
+                int id = rs.getInt(1);
+                String nombre = rs.getString(2);
+                boolean personalizable = rs.getBoolean(3);
+                int precio = rs.getInt(4);
+                producto =""+id+","+nombre;
+                productos.add(producto);
+            }
+            rs.close();
+            stmt.close();
+            c.close();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return productos;
+    }
+    
     public ArrayList<String> leerMenus() {
         Connection c = realizaConexion();
         Statement stmt = null;
@@ -159,7 +185,7 @@ public class GestorDatos {
                 String fecha = rs.getString(6);
                 String nombreComprador = rs.getString(7);
                 int valorCompra = rs.getInt(8);
-                factura = ""+id+","+idproducto+","+numOrden+","+descripcion+","+despachado+","+fecha+","+nombreComprador+","+valorCompra;
+                factura = ""+numOrden+","+descripcion+","+fecha+","+nombreComprador+","+valorCompra+","+idproducto;
                 facturas.add(factura);
             }
             rs.close();

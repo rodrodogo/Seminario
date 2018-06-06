@@ -102,17 +102,6 @@ public class Mediador {
     }
 
     public ArrayList<String> obtenerOrdenes() {
-        Producto pizza = gProductos.consultarInv("pizza");
-        String[] venta = new String[4];
-        venta[0] = "2305180001";
-        venta[1] = "0.20";
-        venta[2] = "20 de mayo 1996";
-        venta[3] = "Luis Mendez";
-        gVentas.añadirProducto(pizza, venta);
-        pizza = gProductos.consultarInv("pizza2");
-        venta[0] = "2305180002";
-        gVentas.añadirProducto(pizza, venta);
-        gVentas.terminarVenta("2305180001");
         return gVentas.obtenerDatos();
     }
 
@@ -247,6 +236,7 @@ public class Mediador {
         ArrayList<String> facturas = gDatos.leerFactura();
         ArrayList<String> menuProdu = gDatos.leerMenuProducto();
         ArrayList<String> produIngre = gDatos.leerProductoIngredientes();
+        ArrayList<String> productosFactura = gDatos.leerProductosFactura();
         for (int i = 0; i < ingredientes.size(); i++) {
             String[] ingrediente = new String[5];
             ingrediente = ingredientes.get(i).split(",");
@@ -262,34 +252,51 @@ public class Mediador {
             for (int j = 0; j < produIngre.size(); j++) {
                 String[] proIng = produIngre.get(j).split(",");
                 if (producto[0].equals(proIng[0])) {
-                    listaIngredientes = listaIngredientes +" "+ proIng[1];
+                    listaIngredientes = listaIngredientes + " " + proIng[1];
                 }
             }
-            productoFinal[0]=producto[0];
-            productoFinal[1]=listaIngredientes;
-            productoFinal[2]=producto[2];
-            productoFinal[3]=producto[1];
+            productoFinal[0] = producto[0];
+            productoFinal[1] = listaIngredientes;
+            productoFinal[2] = producto[2];
+            productoFinal[3] = producto[1];
             registrarProducto(productoFinal);
         }
-        
+
         for (int i = 0; i < menus.size(); i++) {
-            String [] menu = new String[2];
-            String [] menuFinal = new String[3];
+            String[] menu = new String[2];
+            String[] menuFinal = new String[3];
             menu = menus.get(i).split(",");
             String listaProductos = new String();
-            listaProductos ="";
+            listaProductos = "";
             for (int j = 0; j < menuProdu.size(); j++) {
-                String [] menPro =menuProdu.get(j).split(",");
+                String[] menPro = menuProdu.get(j).split(",");
                 if (menu[0].equals(menPro[0])) {
-                    listaProductos = listaProductos +" "+ menPro[1];
+                    listaProductos = listaProductos + " " + menPro[1];
                 }
             }
-           menuFinal[0]=menu[0];
-           menuFinal[1]=listaProductos;
-           menuFinal[2]=menu[1];
+            menuFinal[0] = menu[0];
+            menuFinal[1] = listaProductos;
+            menuFinal[2] = menu[1];
             gestionarMenu(menuFinal);
         }
-        registrarRestaurante(restaurantes.get(0).split(","), 1);  
+        registrarRestaurante(restaurantes.get(0).split(","), 1);
+        for (int i = 0; i < facturas.size(); i++) {
+            Producto pro = null;
+            String[] factura = new String[6];
+            factura = facturas.get(i).split(",");
+            for (int j = 0; j < productosFactura.size(); j++) {
+                String[] producFactura = new String[2];
+                System.out.println("dsa " + productosFactura.get(j));
+                producFactura = productosFactura.get(j).split(",");
+                if (producFactura[0].equals(factura[5])) {
+                    System.out.println("lol " + producFactura[1]);
+                    pro = gProductos.consultarInv(producFactura[1]);
+                    gVentas.añadirProducto(pro, factura);
+                }
+
+            }
+
+        }
     }
 
 //    private void machete() {

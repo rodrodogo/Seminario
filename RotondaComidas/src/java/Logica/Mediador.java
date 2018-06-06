@@ -112,6 +112,9 @@ public class Mediador {
         gVentas.terminarVenta("2305180001");
         return gVentas.obtenerDatos();
     }
+    public void agregarIngAProducto(String nP, String nI){
+        gProductos.agregarIngrediente(nP, nI);
+    }
 
     public boolean registrarRestaurante(String[] actualizacion, int op) {
         Restaurante r = new Restaurante(actualizacion);
@@ -185,12 +188,12 @@ public class Mediador {
     }
 
     public void registrarProducto(String[] actualizacion) {
-        String[] ingredientes = actualizacion[1].split(" ");
+        String ingredientes = actualizacion[1];
         ArrayList<String> arrayIngre = new ArrayList<String>();
-        for (int i = 0; i < ingredientes.length; i++) {
-            arrayIngre.add(ingredientes[i]);
-        }
-        System.out.println(actualizacion[0] + actualizacion[1] + actualizacion[2] + actualizacion[3]);
+        
+            arrayIngre.add(ingredientes);
+        
+        
         Producto pro = new Producto(actualizacion[0], arrayIngre, JSType.toBoolean(actualizacion[3]), Integer.parseInt(actualizacion[2]));
         gProductos.actualizarProducto(pro);
     }

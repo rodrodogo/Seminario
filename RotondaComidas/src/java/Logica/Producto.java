@@ -54,7 +54,9 @@ public class Producto {
     public int getPrecio() {
         return precio;
     }
-
+    public void agregarIng(String ing){
+        ingredientes.add(ing);
+    }
     public void setPrecio(int precio) {
         this.precio = precio;
     }

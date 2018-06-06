@@ -59,7 +59,7 @@ public class GestorMenu {
             Menu temp= menus.get(i);
             ArrayList<String> st=temp.getProductos();
             for (String p: st){
-                productos=productos +"\n"+p;
+                productos=productos +" "+p;
             }
 
             res.add(productos);

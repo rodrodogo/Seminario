@@ -17,9 +17,9 @@ public class GestorProductos {
 
     public GestorProductos() {
         productos = new ArrayList<Producto>();
-        
+
     }
-    
+
     public Producto consultarInv(String busqueda) {
         System.out.println(busqueda);
         for (Producto i : productos) {
@@ -33,9 +33,8 @@ public class GestorProductos {
 
         return null;
     }
-    
-    public void actualizarProducto(Producto in) {
 
+    public void actualizarProducto(Producto in) {
 
         Producto temp = consultarInv(in.getNombreP());
 
@@ -47,32 +46,39 @@ public class GestorProductos {
             temp.setIngredientes(in.getIngredientes());
             temp.setPersonalisable(in.isPersonalisable());
             temp.setPrecio(in.getPrecio());
-            
+
         }
 
     }
 
     ArrayList<String> obtenerDatos() {
-        ArrayList<String> res=new ArrayList<String>();
+        ArrayList<String> res = new ArrayList<String>();
         for (int i = 0; i < productos.size(); i++) {
-           res.add(productos.get(i).getNombreP());
-           String ingre = "";
+            res.add(productos.get(i).getNombreP());
+            String ingre = "";
 
-            for (int j = 0; j < productos.get(i).getIngredientes().size(); j++) {
-                if (j == productos.get(i).getIngredientes().size() - 1) {
-                    ingre += productos.get(i).getIngredientes().get(j);
-                } else {
-                    ingre += productos.get(i).getIngredientes().get(j) + " ";
-                }
+            Producto temp = productos.get(i);
+            ArrayList<String> st = temp.getIngredientes();
+            for (String p : st) {
+                ingre = ingre + " " + p;
             }
-                   
-           res.add(ingre);
-           res.add(""+productos.get(i).getPrecio());
-           res.add(""+productos.get(i).isPersonalisable());
-           
-       }
+
+            res.add(ingre);
+            res.add("" + productos.get(i).getPrecio());
+            res.add("" + productos.get(i).isPersonalisable());
+
+        }
         return res;
     }
-    
-    
+
+    public void agregarIngrediente(String nomP, String ing) {
+        System.out.println("1 : "+nomP);
+         System.out.println("2 : "+ing);
+        for (Producto p : productos) {
+            if (p.getNombreP().equals(nomP)) {
+                p.agregarIng(ing);
+                System.out.println("la wea si funciona");
+            }
+        }
+    }
 }

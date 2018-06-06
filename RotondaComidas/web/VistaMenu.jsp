@@ -110,7 +110,7 @@
                                         <%
                                             ArrayList<String> prod = m.obtenerProductos();
                                             for (int i = 0; i < prod.size(); i += 4) {
-                                                out.println("<option class= \"\" value =" + prod.get(i) + ">" + prod.get(i) + "</option>");
+                                                out.println("<option class= \"\" value =\"" + prod.get(i) + "\">" + prod.get(i) + "</option>");
                                             }
                                         %>
                                     </select>
@@ -138,7 +138,7 @@
                     <div class="card-header" role="tab" id="heading3">
                         <h5 class="mb-0">
                             <a data-toggle="collapse" href="#collapse3" role="button" aria-expanded="true" aria-controls="collapseOne">
-                                Cree un menu
+                                Agregue productos al menu
                             </a>
                         </h5>
                     </div>
@@ -151,12 +151,13 @@
                                 <form>
                                     <div class="form-group">
                                         <label for="nombreM">Nombre</label>
-                                        <select class="custom-select form-control" name ="nombreM">
+                                        <select class="custom-select form-control"  name = "nombreM">
                                             <%
                                                 ArrayList<String> m2 = m.obtenerMenus();
-
-                                                for (int i = 0; i < m2.size(); i += 4) {
-                                                    out.println("<option class= \"\" value =" + m2.get(i) + ">" + m2.get(i) + "</option>");
+                                                //name ="nombreM" 
+                                                for (int i = 0; i < m2.size(); i += 3) {
+                                                    out.println("<option  class= \"\" value =\"" + m2.get(i) + "\">" + m2.get(i) + "</option>");
+                                                   
                                                 }
                                             %>
                                         </select>
@@ -170,13 +171,15 @@
                                         <%
                                             ArrayList<String> prod2 = m.obtenerProductos();
                                             for (int i = 0; i < prod.size(); i += 4) {
-                                                out.println("<option class= \"\" value =" + prod2.get(i) + ">" + prod2.get(i) + "</option>");
+                                                out.println("<option class= \"\" value =\"" + prod2.get(i) + "\">" + prod2.get(i) + "</option>");
                                             }
                                         %>
                                     </select>
                                     <%if (request.getParameter("AgregarP") != null) {
                                             String p = request.getParameter("productosA");
                                             String menu = request.getParameter("nombreM");
+                                            System.out.println("mireme: "+p);
+                                            System.out.println("mireme : "+ menu);
                                             m.productoAMenu(p, menu);
                                         }
 

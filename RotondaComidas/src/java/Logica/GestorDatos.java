@@ -5,6 +5,7 @@
  */
 package Logica;
 
+import com.sun.org.apache.bcel.internal.generic.AALOAD;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
  *
  * @author Luis
  */
-public class gestorDatos {
+public class GestorDatos {
 
     public Connection realizaConexion() {
         Connection conn = null;
@@ -46,7 +47,7 @@ public class gestorDatos {
                 int precio = rs.getInt("precio");
                 boolean cambiable = rs.getBoolean("cambiable");
                 int cantidad = rs.getInt("cantidad");
-                ingrediente=""+id+","+nombre+","+categoria+","+caracteristicas+","+precio+"";
+                ingrediente=""+nombre+","+categoria+","+cantidad+","+precio+","+cambiable+","+caracteristicas;
                 ingredientes.add(ingrediente);
             }
             rs.close();
@@ -67,15 +68,13 @@ public class gestorDatos {
             stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM producto;");
             while (rs.next()) {
+                String producto = new String();
                 int id = rs.getInt(1);
                 String nombre = rs.getString(2);
                 boolean personalizable = rs.getBoolean(3);
                 int precio = rs.getInt(4);
-                System.out.println("ID = " + id);
-                System.out.println("nombre = " + nombre);
-                System.out.println("precio = " + precio);
-                System.out.println("cambiable = " + personalizable);
-                System.out.println();
+                producto =""+nombre+","+personalizable+","+precio+"";
+                productos.add(producto);
             }
             rs.close();
             stmt.close();
@@ -87,22 +86,21 @@ public class gestorDatos {
         return productos;
     }
     
-    public void leerMenus() {
+    public ArrayList<String> leerMenus() {
         Connection c = realizaConexion();
         Statement stmt = null;
+        ArrayList<String> menus = new ArrayList();
         try {
             stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM menu;");
             while (rs.next()) {
+                String menu = new String();
                 int id = rs.getInt(2);
                 int precio = rs.getInt(3);
                 String nombre = rs.getString(4);
                 int idRestaurante = rs.getInt(1);
-                System.out.println("ID = " + id);
-                System.out.println("nombre = " + nombre);
-                System.out.println("precio = " + precio);
-                System.out.println("idrestaurante= " + idRestaurante);
-                System.out.println();
+                menu= nombre+","+precio+"";
+                menus.add(menu);
             }
             rs.close();
             stmt.close();
@@ -111,16 +109,18 @@ public class gestorDatos {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
-        
+        return menus;
     }
     
-    public void leerRestaurante() {
+    public ArrayList<String> leerRestaurante() {
         Connection c = realizaConexion();
         Statement stmt = null;
+        ArrayList<String> restaurantes = new ArrayList();
         try {
             stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM restaurante;");
             while (rs.next()) {
+                String restaurante = new String();
                 int id = rs.getInt(1);
                 String descripcion = rs.getString(2);
                 String direccion = rs.getString(3);
@@ -129,14 +129,8 @@ public class gestorDatos {
                 String nombre = rs.getString(6);
                 String telefono = rs.getString(7);
 
-                System.out.println("ID = " + id);
-                System.out.println("nombre = " + nombre);
-                System.out.println("descripcion = " + descripcion);
-                System.out.println("direccion= " + direccion);
-                System.out.println("dueno= " + dueno);
-                System.out.println("nit= " + nit);
-                System.out.println("telefono= " + telefono);
-                System.out.println();
+                restaurante = ""+direccion+","+dueno+","+nit+","+nombre+","+telefono;
+                restaurantes.add(restaurante);
             }
             rs.close();
             stmt.close();
@@ -145,16 +139,18 @@ public class gestorDatos {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
-        
+        return restaurantes;
     }
     
-     public void leerFactura() {
+     public ArrayList<String> leerFactura() {
         Connection c = realizaConexion();
         Statement stmt = null;
+        ArrayList<String> facturas = new ArrayList();
         try {
             stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM factura;");
             while (rs.next()) {
+                String factura = new String();
                 int id = rs.getInt(1);
                 int idproducto = rs.getInt(2);
                 String numOrden = rs.getString(3);
@@ -163,16 +159,8 @@ public class gestorDatos {
                 String fecha = rs.getString(6);
                 String nombreComprador = rs.getString(7);
                 int valorCompra = rs.getInt(8);
-
-                System.out.println("ID = " + id);
-                System.out.println("idproducto = " + idproducto);
-                System.out.println("numOrden = " + numOrden);
-                System.out.println("descripcion= " + descripcion);
-                System.out.println("despachado= " + despachado);
-                System.out.println("fecha= " + fecha);
-                System.out.println("nombreComprador= " + nombreComprador);
-                System.out.println("valorCompra= " + valorCompra);
-                System.out.println();
+                factura = ""+id+","+idproducto+","+numOrden+","+descripcion+","+despachado+","+fecha+","+nombreComprador+","+valorCompra;
+                facturas.add(factura);
             }
             rs.close();
             stmt.close();
@@ -181,21 +169,22 @@ public class gestorDatos {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
-        
+        return facturas;
     }
 
-      public void leerProductoIngredientes() {
+      public ArrayList<String> leerProductoIngredientes() {
         Connection c = realizaConexion();
         Statement stmt = null;
+        ArrayList<String> producIngres = new ArrayList();
         try {
             stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery("select nombrep, nombre from producto, ingrediente,productoingrediente where ingrediente.idingrediente=productoingrediente.idingrediente and producto.idproducto=productoingrediente.idproducto ;;");
             while (rs.next()) {
+                String producIngre = new String();
                 String producto = rs.getString(1);
                 String ingrediente= rs.getString(2);
-                System.out.println("producto = " + producto);
-                System.out.println("ingrediente = " + ingrediente);
-                System.out.println();
+                producIngre=""+producto+","+ingrediente+"";
+                producIngres.add(producIngre);
             }
             rs.close();
             stmt.close();
@@ -204,21 +193,22 @@ public class gestorDatos {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
-        
+        return producIngres;
     }
       
-      public void leerMenuProducto() {
+      public ArrayList<String> leerMenuProducto() {
         Connection c = realizaConexion();
         Statement stmt = null;
+        ArrayList<String> menuProdus = new ArrayList();
         try {
             stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery("select nombrem, nombrep from producto, menu,menuproducto where menu.idmenu=menuproducto.idmenu and producto.idproducto=menuproducto.idproducto ;");
             while (rs.next()) {
+                String menuProdu = new String();
                 String menu = rs.getString(1);
                 String producto= rs.getString(2);
-                System.out.println("menu = " + menu);
-                System.out.println("producto = " + producto);
-                System.out.println();
+                menuProdu = ""+menu+","+producto+"";
+                menuProdus.add(menuProdu);
             }
             rs.close();
             stmt.close();
@@ -227,11 +217,8 @@ public class gestorDatos {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
-        
+        return menuProdus;
     }
      
-    public static void main(String[] args) {
-        gestorDatos gestor = new gestorDatos();
-        System.out.println(gestor.leerIngredientes().get(0));
-    } 
+   
 }

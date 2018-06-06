@@ -19,7 +19,8 @@ public class Mediador {
     private GestorProductos gProductos;
     private GestorMenu gMenu;
     private GestorFactura gVentas;
-    
+    private GestorDatos gDatos;
+
     private ArrayList<String> tempMenu;
 
     public Mediador() {
@@ -30,8 +31,9 @@ public class Mediador {
         gVentas = new GestorFactura();
         gMenu = new GestorMenu();
         tempMenu = new ArrayList<>();
+        gDatos = new GestorDatos();
         System.out.println("la wea team");
-
+        cargaDatos();
     }
 
     public void actualizarIng(String[] actualizacion) {
@@ -53,8 +55,9 @@ public class Mediador {
     public ArrayList<String> obtenerProductos() {
         return gProductos.obtenerDatos();
     }
-    public void productoAMenu(String p, String M){
-      gMenu.agregarProducto(p, M);
+
+    public void productoAMenu(String p, String M) {
+        gMenu.agregarProducto(p, M);
     }
 
     public ArrayList<String> obtenerIngredientes() {
@@ -64,12 +67,12 @@ public class Mediador {
 
     public void añadirProductoCarrito(String nombre, String cantidad) {
         Menu temp = gMenu.consultarMenu(nombre);
-        
+
         ArrayList<String> arrayProductos = temp.getProductos();
         for (int j = 0; j < Integer.parseInt(cantidad); j++) {
             tempMenu.add(nombre);
             for (int i = 0; i < arrayProductos.size(); i++) {
-                
+
                 Producto tempPro = gProductos.consultarInv(arrayProductos.get(i));
 
                 gVentas.añadirACarrito(tempPro);
@@ -77,27 +80,27 @@ public class Mediador {
         }
 
     }
-    
-    public ArrayList<String> tempCarrito(){
+
+    public ArrayList<String> tempCarrito() {
         return tempMenu;
     }
-    
-    public void eliminarProductoCarrito(int index){
+
+    public void eliminarProductoCarrito(int index) {
         Menu temp = gMenu.consultarMenu(tempMenu.get(index));
         ArrayList<String> arrayProductos = temp.getProductos();
         for (int i = 0; i < arrayProductos.size(); i++) {
-                
-                Producto tempPro = gProductos.consultarInv(arrayProductos.get(i));
 
-                gVentas.borrarACarrito(tempPro);
-            }
+            Producto tempPro = gProductos.consultarInv(arrayProductos.get(i));
+
+            gVentas.borrarACarrito(tempPro);
+        }
     }
-    public void finalizarOrden(){
+
+    public void finalizarOrden() {
         gVentas.finalizarCarrito();
         tempMenu.clear();
     }
 
-    
     public ArrayList<String> obtenerOrdenes() {
         Producto pizza = gProductos.consultarInv("pizza");
         String[] venta = new String[4];
@@ -112,7 +115,8 @@ public class Mediador {
         gVentas.terminarVenta("2305180001");
         return gVentas.obtenerDatos();
     }
-    public void agregarIngAProducto(String nP, String nI){
+
+    public void agregarIngAProducto(String nP, String nI) {
         gProductos.agregarIngrediente(nP, nI);
     }
 
@@ -190,10 +194,9 @@ public class Mediador {
     public void registrarProducto(String[] actualizacion) {
         String ingredientes = actualizacion[1];
         ArrayList<String> arrayIngre = new ArrayList<String>();
-        
-            arrayIngre.add(ingredientes);
-        
-        
+
+        arrayIngre.add(ingredientes);
+
         Producto pro = new Producto(actualizacion[0], arrayIngre, JSType.toBoolean(actualizacion[3]), Integer.parseInt(actualizacion[2]));
         gProductos.actualizarProducto(pro);
     }
@@ -231,9 +234,62 @@ public class Mediador {
 
     public void gestionarMenu(String[] actualizacion) {
         String producto = actualizacion[1];
-       
+
         Menu menutemp = new Menu(actualizacion[0], producto, Integer.parseInt(actualizacion[2]));
         gMenu.actualizarMenu(menutemp);
+    }
+
+    private void cargaDatos() {
+        ArrayList<String> ingredientes = gDatos.leerIngredientes();
+        ArrayList<String> productos = gDatos.leerProductos();
+        ArrayList<String> menus = gDatos.leerMenus();
+        ArrayList<String> restaurantes = gDatos.leerRestaurante();
+        ArrayList<String> facturas = gDatos.leerFactura();
+        ArrayList<String> menuProdu = gDatos.leerMenuProducto();
+        ArrayList<String> produIngre = gDatos.leerProductoIngredientes();
+        for (int i = 0; i < ingredientes.size(); i++) {
+            String[] ingrediente = new String[5];
+            ingrediente = ingredientes.get(i).split(",");
+            actualizarIng(ingrediente);
+        }
+
+        for (int i = 0; i < productos.size(); i++) {
+            String[] producto = new String[3];
+            String[] productoFinal = new String[4];
+            producto = productos.get(i).split(",");
+            String listaIngredientes = new String();
+            listaIngredientes = "";
+            for (int j = 0; j < produIngre.size(); j++) {
+                String[] proIng = produIngre.get(j).split(",");
+                if (producto[0].equals(proIng[0])) {
+                    listaIngredientes = listaIngredientes +" "+ proIng[1];
+                }
+            }
+            productoFinal[0]=producto[0];
+            productoFinal[1]=listaIngredientes;
+            productoFinal[2]=producto[2];
+            productoFinal[3]=producto[1];
+            registrarProducto(productoFinal);
+        }
+        
+        for (int i = 0; i < menus.size(); i++) {
+            String [] menu = new String[2];
+            String [] menuFinal = new String[3];
+            menu = menus.get(i).split(",");
+            String listaProductos = new String();
+            listaProductos ="";
+            for (int j = 0; j < menuProdu.size(); j++) {
+                String [] menPro =menuProdu.get(j).split(",");
+                if (menu[0].equals(menPro[0])) {
+                    listaProductos = listaProductos +" "+ menPro[1];
+                }
+            }
+           menuFinal[0]=menu[0];
+           menuFinal[1]=listaProductos;
+           menuFinal[2]=menu[1];
+            gestionarMenu(menuFinal);
+        }
+        registrarRestaurante(restaurantes.get(0).split(","), 1);  
     }
 
 //    private void machete() {
